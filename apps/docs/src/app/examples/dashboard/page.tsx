@@ -30,6 +30,7 @@ import {
   useToast,
   useTheme,
 } from "@velora/core";
+import { useCommandPalette } from "../../../components/CommandPalette";
 import {
   LayoutDashboard,
   Users,
@@ -169,6 +170,7 @@ function StatCard({
 export default function DashboardPage() {
   const { toast, success } = useToast();
   const { theme, setTheme } = useTheme();
+  const { setOpen } = useCommandPalette();
   const [selectedRows, setSelectedRows] = React.useState<Set<string>>(new Set());
   const [sortKey, setSortKey] = React.useState<string>("date");
   const [sortDir, setSortDir] = React.useState<"asc" | "desc">("desc");
@@ -237,6 +239,7 @@ export default function DashboardPage() {
                 size="sm"
                 leadingIcon={<Search className="h-3.5 w-3.5" />}
                 className="w-44 justify-start text-[var(--velora-text-tertiary)]"
+                onClick={() => setOpen(true)}
               >
                 Search...
                 <kbd className="ml-auto text-[10px] font-mono opacity-60">Ctrl+K</kbd>

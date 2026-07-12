@@ -110,7 +110,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       defaultValue,
       onChange,
-      autoComplete = "off",
+      autoComplete,
       ...props
     },
     ref
@@ -131,6 +131,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const id = idProp ?? React.useId();
     const helperId = `${id}-helper`;
     const errorId = `${id}-error`;
+    const resolvedAutoComplete = autoComplete === "off" ? "no" : autoComplete;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!isControlled) {
@@ -212,7 +213,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={id}
               type={resolvedType}
               className={inputBaseClasses}
-              autoComplete={autoComplete}
+              autoComplete={resolvedAutoComplete}
               value={isControlled ? value : undefined}
               defaultValue={isControlled ? undefined : defaultValue}
               maxLength={maxLength}
