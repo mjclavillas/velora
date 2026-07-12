@@ -7,11 +7,5 @@ export default function ExamplesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="min-h-dvh bg-[var(--velora-bg-base)] font-sans antialiased">
-        <Providers>{children}</Providers>
-      </body>
-    </html>
-  );
+  return <Providers>{children}</Providers>;
 }

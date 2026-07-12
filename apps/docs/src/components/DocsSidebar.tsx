@@ -94,7 +94,9 @@ const navigation: NavSection[] = [
   {
     title: "Examples",
     items: [
-      { title: "Dashboard & Auth", href: "/docs/examples" },
+      { title: "Dashboard", href: "/examples/dashboard", badge: "Full" },
+      { title: "Auth Forms", href: "/examples/auth", badge: "Full" },
+      { title: "All Previews", href: "/docs/examples" },
     ],
   },
 ];
