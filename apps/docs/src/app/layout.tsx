@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   },
   description:
     "Premium React UI Ecosystem. Beautiful, accessible, and theme-first components built with Radix UI and Framer Motion.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   keywords: [
     "react",
     "component library",

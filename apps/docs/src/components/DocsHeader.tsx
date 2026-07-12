@@ -59,6 +59,7 @@ export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
             { href: "/docs", label: "Docs" },
             { href: "/docs/components/button", label: "Components" },
             { href: "/docs/theming/tokens", label: "Themes" },
+            { href: "/docs/examples", label: "Examples" },
           ].map(({ href, label }) => (
             <Link
               key={href}
@@ -88,7 +89,7 @@ export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
           <SimpleTooltip content="GitHub">
             <Button variant="ghost" size="icon" asChild>
               <a
-                href="https://github.com/velora-ui/velora"
+                href="https://github.com/mjclavillas/velora"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub repository"

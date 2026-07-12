@@ -1,0 +1,126 @@
+@import "@velora/core/styles";
+@import "tailwindcss";
+
+@source "../../../../packages/core/src";
+@source "../../../../packages/motion/src";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--velora-bg-base);
+    color: var(--velora-text-primary);
+    font-family: var(--velora-font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Code blocks */
+  pre {
+    background: var(--velora-surface-sunken) !important;
+    border: 1px solid var(--velora-border-muted);
+    border-radius: var(--velora-radius-lg);
+    overflow: auto;
+    font-family: var(--velora-font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  code:not(pre code) {
+    background: var(--velora-brand-subtle);
+    color: var(--velora-text-brand);
+    border-radius: var(--velora-radius-sm);
+    padding: 1px 6px;
+    font-family: var(--velora-font-mono);
+    font-size: 0.85em;
+  }
+
+  /* Prose */
+  .prose {
+    color: var(--velora-text-secondary);
+    line-height: 1.75;
+  }
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: var(--velora-text-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .prose h1 { font-size: 2rem; margin-bottom: 1rem; }
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--velora-border-muted);
+  }
+  .prose h3 { font-size: 1.125rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+  .prose p { margin-bottom: 1.25rem; }
+  .prose a {
+    color: var(--velora-text-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose a:hover { opacity: 0.8; }
+  .prose ul, .prose ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  .prose li { margin-bottom: 0.4rem; }
+  .prose blockquote {
+    border-left: 3px solid var(--velora-brand-default);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--velora-text-tertiary);
+    font-style: italic;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+  .prose th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--velora-text-tertiary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--velora-border-base);
+  }
+  .prose td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--velora-border-muted);
+    color: var(--velora-text-secondary);
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(128, 96, 255, 0.25);
+    color: var(--velora-text-primary);
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    outline: 2px solid var(--velora-brand-default);
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--velora-border-base) transparent;
+  }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb {
+    background: var(--velora-border-base);
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--velora-border-strong);
+  }
+}

@@ -91,6 +91,12 @@ const navigation: NavSection[] = [
       { title: "Tailwind Plugin", href: "/docs/theming/tailwind-plugin" },
     ],
   },
+  {
+    title: "Examples",
+    items: [
+      { title: "Dashboard & Auth", href: "/docs/examples" },
+    ],
+  },
 ];
 
 export function DocsSidebar() {
