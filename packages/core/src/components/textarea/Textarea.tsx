@@ -51,6 +51,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       onChange,
       id: idProp,
       required,
+      autoComplete = "off",
       ...props
     },
     ref
@@ -108,6 +109,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             ref={composeRef}
             id={id}
             rows={minRows}
+            autoComplete={autoComplete}
             value={isControlled ? (value as string) : undefined}
             defaultValue={isControlled ? undefined : (defaultValue as string)}
             maxLength={maxLength}

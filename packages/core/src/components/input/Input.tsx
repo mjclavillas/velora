@@ -110,6 +110,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       defaultValue,
       onChange,
+      autoComplete = "off",
       ...props
     },
     ref
@@ -211,6 +212,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={id}
               type={resolvedType}
               className={inputBaseClasses}
+              autoComplete={autoComplete}
               value={isControlled ? value : undefined}
               defaultValue={isControlled ? undefined : defaultValue}
               maxLength={maxLength}

@@ -121,6 +121,7 @@ function Command({
         <input
           ref={inputRef}
           value={query}
+          autoComplete="off"
           onChange={(e) => {
             setQuery(e.target.value);
             setActiveIdx(0);

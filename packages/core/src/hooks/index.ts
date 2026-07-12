@@ -223,6 +223,9 @@ export function useKeyboard(
   handlers: Partial<Record<string, (e: KeyboardEvent) => void>>,
   enabled = true
 ): void {
+  const handlersRef = React.useRef(handlers);
+  handlersRef.current = handlers;
+
   React.useEffect(() => {
     if (!enabled) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -231,16 +234,18 @@ export function useKeyboard(
         e.metaKey && "meta",
         e.shiftKey && "shift",
         e.altKey && "alt",
-        e.key,
+        e.key.toLowerCase(),
       ]
         .filter(Boolean)
         .join("+");
-      handlers[key]?.(e);
-      handlers[e.key]?.(e);
+      const handler = handlersRef.current[key] ?? handlersRef.current[e.key.toLowerCase()];
+      if (handler) {
+        handler(e);
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [handlers, enabled]);
+  }, [enabled]);
 }
 
 // ─── usePrevious ─────────────────────────────────────────────────────────────

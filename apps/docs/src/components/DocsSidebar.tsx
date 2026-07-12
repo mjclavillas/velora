@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@velora/core";
+import { Search } from "lucide-react";
+import { useCommandPalette } from "./CommandPalette";
 
 interface NavItem {
   title: string;
@@ -103,9 +105,22 @@ const navigation: NavSection[] = [
 
 export function DocsSidebar() {
   const pathname = usePathname();
+  const { setOpen } = useCommandPalette();
 
   return (
     <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] w-64 shrink-0 overflow-y-auto border-r border-[var(--velora-border-muted)] py-8 pr-2 lg:block scrollbar-thin">
+      <div className="mb-6 px-3">
+        <button
+          onClick={() => setOpen(true)}
+          className="flex w-full items-center gap-2 h-8 rounded-[var(--velora-radius-md)] border border-[var(--velora-border-base)] bg-[var(--velora-surface-base)] px-3 text-sm text-[var(--velora-text-tertiary)] hover:border-[var(--velora-border-strong)] hover:text-[var(--velora-text-secondary)] transition-colors cursor-pointer"
+        >
+          <Search className="h-3.5 w-3.5 shrink-0" />
+          <span className="flex-1 text-left">Search…</span>
+          <kbd className="hidden sm:inline-flex h-5 items-center rounded border border-[var(--velora-border-base)] bg-[var(--velora-bg-subtle)] px-1.5 text-[10px] font-mono text-[var(--velora-text-tertiary)]">
+            ⌘K
+          </kbd>
+        </button>
+      </div>
       <nav aria-label="Documentation navigation">
         {navigation.map((section) => (
           <div key={section.title} className="mb-6">

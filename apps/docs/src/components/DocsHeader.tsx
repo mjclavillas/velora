@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button, useTheme, type VeloraTheme, SimpleTooltip, cn } from "@velora/core";
 import { Sun, Moon, Monitor, Github, Search, Menu } from "lucide-react";
+import { useCommandPalette } from "./CommandPalette";
 
 const themeIcons: Record<string, React.ReactNode> = {
   light: <Sun className="h-4 w-4" />,
@@ -35,6 +36,7 @@ function ThemeToggle() {
 
 export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
   const pathname = usePathname();
+  const { setOpen } = useCommandPalette();
   const navLinks = [
     { href: "/docs", label: "Docs" },
     { href: "/docs/components/button", label: "Components" },
@@ -88,7 +90,8 @@ export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
         <div className="flex flex-1 items-center justify-end gap-2">
           {/* Search */}
           <button
-            className="hidden md:flex items-center gap-2 h-8 rounded-[var(--velora-radius-md)] border border-[var(--velora-border-base)] bg-[var(--velora-surface-base)] px-3 text-sm text-[var(--velora-text-tertiary)] hover:border-[var(--velora-border-strong)] transition-colors w-44"
+            onClick={() => setOpen(true)}
+            className="hidden md:flex items-center gap-2 h-8 rounded-[var(--velora-radius-md)] border border-[var(--velora-border-base)] bg-[var(--velora-surface-base)] px-3 text-sm text-[var(--velora-text-tertiary)] hover:border-[var(--velora-border-strong)] transition-colors w-44 cursor-pointer"
             aria-label="Search documentation (⌘K)"
           >
             <Search className="h-3.5 w-3.5 shrink-0" aria-hidden />
