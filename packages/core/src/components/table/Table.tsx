@@ -360,7 +360,7 @@ function DataTable<T extends Record<string, unknown>>({
                 <TableCell key={col.key}>
                   <div
                     className="h-4 animate-pulse rounded bg-[var(--velora-bg-muted)]"
-                    style={{ width: `${60 + Math.random() * 30}%` }}
+                    style={{ width: `${60 + ((i * 7 + columns.indexOf(col) * 13) % 30)}%` }}
                   />
                 </TableCell>
               ))}

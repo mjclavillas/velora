@@ -25,15 +25,14 @@ export function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
-  const [storedValue, setStoredValue] = React.useState<T>(() => {
-    if (typeof window === "undefined") return initialValue;
+  const [storedValue, setStoredValue] = React.useState<T>(initialValue);
+
+  React.useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
+      if (item) setStoredValue(JSON.parse(item) as T);
+    } catch {}
+  }, [key]);
 
   const setValue = React.useCallback(
     (value: T | ((prev: T) => T)) => {
@@ -66,16 +65,13 @@ export function useLocalStorage<T>(
 // ─── useMediaQuery ────────────────────────────────────────────────────────────
 
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = React.useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia(query).matches;
-  });
+  const [matches, setMatches] = React.useState(false);
 
   React.useEffect(() => {
     const mq = window.matchMedia(query);
+    setMatches(mq.matches);
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
     mq.addEventListener("change", handler);
-    setMatches(mq.matches);
     return () => mq.removeEventListener("change", handler);
   }, [query]);
 

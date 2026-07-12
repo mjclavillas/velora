@@ -102,19 +102,20 @@ export function ThemeProvider({
   attribute = "data-velora-theme",
   themeRoot = "html",
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<VeloraTheme>(() => {
-    if (typeof window === "undefined") return defaultTheme;
-    try {
-      return (localStorage.getItem(storageKey) as VeloraTheme) ?? defaultTheme;
-    } catch {
-      return defaultTheme;
-    }
-  });
+  const [theme, setThemeState] = useState<VeloraTheme>(defaultTheme);
+  const [mounted, setMounted] = useState(false);
 
-  const [systemIsDark, setSystemIsDark] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+  const [systemIsDark, setSystemIsDark] = useState(false);
+
+  // Hydrate from localStorage and matchMedia after mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(storageKey) as VeloraTheme | null;
+      if (stored) setThemeState(stored);
+    } catch {}
+    setSystemIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setMounted(true);
+  }, [storageKey]);
 
   // Detect system preference changes
   useEffect(() => {
