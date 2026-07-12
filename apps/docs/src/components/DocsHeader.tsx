@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button, useTheme, type VeloraTheme, SimpleTooltip } from "@velora/core";
+import { usePathname } from "next/navigation";
+import { Button, useTheme, type VeloraTheme, SimpleTooltip, cn } from "@velora/core";
 import { Sun, Moon, Monitor, Github, Search, Menu } from "lucide-react";
 
 const themeIcons: Record<string, React.ReactNode> = {
@@ -33,6 +34,19 @@ function ThemeToggle() {
 }
 
 export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
+  const pathname = usePathname();
+  const navLinks = [
+    { href: "/docs", label: "Docs" },
+    { href: "/docs/components/button", label: "Components" },
+    { href: "/docs/theming/tokens", label: "Themes" },
+    { href: "/docs/examples", label: "Examples" },
+  ];
+
+  function isActive(href: string) {
+    if (href === "/docs") return pathname === "/docs";
+    if (href === "/docs/examples") return pathname.startsWith("/docs/examples") || pathname.startsWith("/examples");
+    return pathname.startsWith(href);
+  }
   return (
     <header className="sticky top-0 z-[1100] flex h-16 items-center border-b border-[var(--velora-border-muted)] bg-[var(--velora-bg-base)]/80 backdrop-blur-md px-6">
       <div className="flex w-full items-center gap-6">
@@ -55,16 +69,16 @@ export function DocsHeader({ onMenuClick }: { onMenuClick?: () => void }) {
 
         {/* Nav */}
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
-          {[
-            { href: "/docs", label: "Docs" },
-            { href: "/docs/components/button", label: "Components" },
-            { href: "/docs/theming/tokens", label: "Themes" },
-            { href: "/docs/examples", label: "Examples" },
-          ].map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className="rounded-[var(--velora-radius-md)] px-3 py-1.5 text-sm text-[var(--velora-text-secondary)] transition-colors hover:bg-[var(--velora-bg-subtle)] hover:text-[var(--velora-text-primary)]"
+              className={cn(
+                "rounded-[var(--velora-radius-md)] px-3 py-1.5 text-sm transition-colors",
+                isActive(href)
+                  ? "bg-[var(--velora-brand-subtle)] font-medium text-[var(--velora-text-brand)]"
+                  : "text-[var(--velora-text-secondary)] hover:bg-[var(--velora-bg-subtle)] hover:text-[var(--velora-text-primary)]"
+              )}
             >
               {label}
             </Link>
