@@ -1,0 +1,44 @@
+{
+  "name": "velora",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Premium React UI Ecosystem",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tooling/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=!docs && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.2",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.7.1",
+  "pnpm": {
+    "overrides": {
+      "vitest": ">=3.2.6",
+      "vite": ">=6.4.3",
+      "esbuild": ">=0.28.1",
+      "postcss": ">=8.5.10",
+      "next-mdx-remote": ">=6.0.0",
+      "launch-editor": ">=2.3.0"
+    }
+  }
+}

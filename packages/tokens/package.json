@@ -1,0 +1,40 @@
+{
+  "name": "@velora/tokens",
+  "version": "0.1.0",
+  "description": "Velora design tokens as JS/TS constants",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjclavillas/velora.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://mjdc.xyz",
+  "bugs": {
+    "url": "https://github.com/mjclavillas/velora/issues"
+  },
+  "keywords": ["tokens", "design-tokens", "css-variables", "theme", "velora"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.4"
+  }
+}

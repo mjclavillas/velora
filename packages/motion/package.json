@@ -1,0 +1,48 @@
+{
+  "name": "@velora/motion",
+  "version": "0.1.0",
+  "description": "Velora animation utilities and React components",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjclavillas/velora.git",
+    "directory": "packages/motion"
+  },
+  "homepage": "https://mjdc.xyz",
+  "bugs": {
+    "url": "https://github.com/mjclavillas/velora/issues"
+  },
+  "keywords": ["animation", "motion", "framer-motion", "react", "transitions", "velora"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --dts",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "framer-motion": ">=11.0.0",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.5.4"
+  }
+}

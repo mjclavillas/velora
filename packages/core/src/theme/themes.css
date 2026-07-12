@@ -1,0 +1,360 @@
+/**
+ * Velora Theme System
+ * CSS custom properties for all built-in themes.
+ * Consumed by components via Tailwind CSS utility classes.
+ */
+
+/* ─── Font Import ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Sora:wght@100..800&display=swap');
+
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+:root {
+  --velora-font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --velora-font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --velora-font-display: "Sora", "Inter", system-ui, sans-serif;
+
+  --velora-radius-xs: 2px;
+  --velora-radius-sm: 4px;
+  --velora-radius-md: 8px;
+  --velora-radius-lg: 12px;
+  --velora-radius-xl: 16px;
+  --velora-radius-2xl: 20px;
+  --velora-radius-3xl: 24px;
+  --velora-radius-full: 9999px;
+
+  /* Component radius scale — change once, updates everywhere */
+  --velora-radius-component: var(--velora-radius-lg);
+  --velora-radius-input: var(--velora-radius-md);
+  --velora-radius-badge: var(--velora-radius-full);
+  --velora-radius-card: var(--velora-radius-xl);
+  --velora-radius-button: var(--velora-radius-lg);
+}
+
+/* ─── Light Theme (default) ───────────────────────────────────────────────── */
+[data-velora-theme="light"],
+.velora-light,
+:root {
+  color-scheme: light;
+
+  /* Background */
+  --velora-bg-base: #ffffff;
+  --velora-bg-subtle: #f8f9fc;
+  --velora-bg-muted: #f0f2f8;
+  --velora-bg-inverted: #1a2035;
+  --velora-bg-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Surface */
+  --velora-surface-base: #ffffff;
+  --velora-surface-raised: #ffffff;
+  --velora-surface-overlay: #ffffff;
+  --velora-surface-sunken: #f0f2f8;
+
+  /* Brand (Violet) */
+  --velora-brand-default: #8060ff;
+  --velora-brand-emphasis: #6b3ef5;
+  --velora-brand-subtle: #ede8ff;
+  --velora-brand-muted: #f5f2ff;
+  --velora-brand-fg: #ffffff;
+
+  /* Text */
+  --velora-text-primary: #1a2035;
+  --velora-text-secondary: #404e72;
+  --velora-text-tertiary: #7285ae;
+  --velora-text-disabled: #9aaac8;
+  --velora-text-inverse: #ffffff;
+  --velora-text-brand: #6b3ef5;
+  --velora-text-success: #047857;
+  --velora-text-warning: #b45309;
+  --velora-text-danger: #be123c;
+
+  /* Border */
+  --velora-border-base: #dde2ef;
+  --velora-border-muted: #f0f2f8;
+  --velora-border-strong: #c4cde0;
+  --velora-border-brand: #8060ff;
+  --velora-border-success: #10b981;
+  --velora-border-warning: #f59e0b;
+  --velora-border-danger: #f43f5e;
+
+  /* State */
+  --velora-state-success: #10b981;
+  --velora-state-warning: #f59e0b;
+  --velora-state-danger: #f43f5e;
+  --velora-state-info: #06add3;
+  --velora-state-success-subtle: #ecfdf5;
+  --velora-state-warning-subtle: #fffbeb;
+  --velora-state-danger-subtle: #fff1f2;
+  --velora-state-info-subtle: #ecfcff;
+
+  /* Shadows */
+  --velora-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --velora-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --velora-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --velora-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --velora-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --velora-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.12);
+  --velora-shadow-brand: 0 0 24px -4px rgba(128, 96, 255, 0.4);
+  --velora-shadow-brand-lg: 0 8px 32px -4px rgba(128, 96, 255, 0.5);
+}
+
+/* ─── Dark Theme ──────────────────────────────────────────────────────────── */
+[data-velora-theme="dark"],
+.velora-dark,
+.dark {
+  color-scheme: dark;
+
+  --velora-bg-base: #0d1120;
+  --velora-bg-subtle: #131729;
+  --velora-bg-muted: #1a2035;
+  --velora-bg-inverted: #f8f9fc;
+  --velora-bg-overlay: rgba(0, 0, 0, 0.6);
+
+  --velora-surface-base: #131729;
+  --velora-surface-raised: #1a2035;
+  --velora-surface-overlay: #1f2744;
+  --velora-surface-sunken: #0d1120;
+
+  --velora-brand-default: #a08bff;
+  --velora-brand-emphasis: #8060ff;
+  --velora-brand-subtle: #2c2050;
+  --velora-brand-muted: #1e1838;
+  --velora-brand-fg: #0d1120;
+
+  --velora-text-primary: #f0f2f8;
+  --velora-text-secondary: #c4cde0;
+  --velora-text-tertiary: #7285ae;
+  --velora-text-disabled: #404e72;
+  --velora-text-inverse: #0d1120;
+  --velora-text-brand: #a08bff;
+  --velora-text-success: #34d399;
+  --velora-text-warning: #fbbf24;
+  --velora-text-danger: #fb7185;
+
+  --velora-border-base: #2c3650;
+  --velora-border-muted: #1a2035;
+  --velora-border-strong: #404e72;
+  --velora-border-brand: #a08bff;
+  --velora-border-success: #10b981;
+  --velora-border-warning: #f59e0b;
+  --velora-border-danger: #f43f5e;
+
+  --velora-state-success: #10b981;
+  --velora-state-warning: #f59e0b;
+  --velora-state-danger: #f43f5e;
+  --velora-state-info: #1ac8ed;
+  --velora-state-success-subtle: #022c22;
+  --velora-state-warning-subtle: #451a03;
+  --velora-state-danger-subtle: #4c0519;
+  --velora-state-info-subtle: #073142;
+
+  --velora-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.16);
+  --velora-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.16);
+  --velora-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.16);
+  --velora-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.24), 0 4px 6px -4px rgb(0 0 0 / 0.16);
+  --velora-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.28), 0 8px 10px -6px rgb(0 0 0 / 0.16);
+  --velora-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+  --velora-shadow-brand: 0 0 24px -4px rgba(160, 139, 255, 0.5);
+  --velora-shadow-brand-lg: 0 8px 32px -4px rgba(160, 139, 255, 0.6);
+}
+
+/* ─── System Theme ────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  [data-velora-theme="system"] {
+    color-scheme: dark;
+    --velora-bg-base: #0d1120;
+    --velora-bg-subtle: #131729;
+    --velora-bg-muted: #1a2035;
+    --velora-bg-inverted: #f8f9fc;
+    --velora-bg-overlay: rgba(0, 0, 0, 0.6);
+    --velora-surface-base: #131729;
+    --velora-surface-raised: #1a2035;
+    --velora-surface-overlay: #1f2744;
+    --velora-surface-sunken: #0d1120;
+    --velora-brand-default: #a08bff;
+    --velora-brand-emphasis: #8060ff;
+    --velora-brand-subtle: #2c2050;
+    --velora-brand-muted: #1e1838;
+    --velora-brand-fg: #0d1120;
+    --velora-text-primary: #f0f2f8;
+    --velora-text-secondary: #c4cde0;
+    --velora-text-tertiary: #7285ae;
+    --velora-text-disabled: #404e72;
+    --velora-text-inverse: #0d1120;
+    --velora-text-brand: #a08bff;
+    --velora-text-success: #34d399;
+    --velora-text-warning: #fbbf24;
+    --velora-text-danger: #fb7185;
+    --velora-border-base: #2c3650;
+    --velora-border-muted: #1a2035;
+    --velora-border-strong: #404e72;
+    --velora-border-brand: #a08bff;
+    --velora-border-success: #10b981;
+    --velora-border-warning: #f59e0b;
+    --velora-border-danger: #f43f5e;
+    --velora-state-success: #10b981;
+    --velora-state-warning: #f59e0b;
+    --velora-state-danger: #f43f5e;
+    --velora-state-info: #1ac8ed;
+    --velora-state-success-subtle: #022c22;
+    --velora-state-warning-subtle: #451a03;
+    --velora-state-danger-subtle: #4c0519;
+    --velora-state-info-subtle: #073142;
+    --velora-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.16);
+    --velora-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.16);
+    --velora-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.16);
+    --velora-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.24), 0 4px 6px -4px rgb(0 0 0 / 0.16);
+    --velora-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.28), 0 8px 10px -6px rgb(0 0 0 / 0.16);
+    --velora-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+    --velora-shadow-brand: 0 0 24px -4px rgba(160, 139, 255, 0.5);
+    --velora-shadow-brand-lg: 0 8px 32px -4px rgba(160, 139, 255, 0.6);
+  }
+}
+
+/* ─── AMOLED Theme ────────────────────────────────────────────────────────── */
+[data-velora-theme="amoled"] {
+  color-scheme: dark;
+  --velora-bg-base: #000000;
+  --velora-bg-subtle: #050508;
+  --velora-bg-muted: #0a0b12;
+  --velora-surface-base: #080a10;
+  --velora-surface-raised: #0d1018;
+  --velora-surface-overlay: #111522;
+  --velora-surface-sunken: #000000;
+  --velora-text-primary: #ffffff;
+  --velora-text-secondary: #d0d8f0;
+  --velora-text-tertiary: #6070a0;
+  --velora-text-disabled: #303860;
+  --velora-border-base: #181e30;
+  --velora-border-muted: #0d1018;
+  --velora-border-strong: #282e48;
+  --velora-brand-default: #a08bff;
+  --velora-brand-emphasis: #c0b4ff;
+  --velora-brand-subtle: #1a1235;
+  --velora-brand-muted: #100c20;
+  --velora-shadow-brand: 0 0 32px -4px rgba(160, 139, 255, 0.7);
+}
+
+/* ─── Glass Theme ─────────────────────────────────────────────────────────── */
+[data-velora-theme="glass"] {
+  color-scheme: dark;
+  --velora-bg-base: rgba(13, 17, 32, 0.6);
+  --velora-bg-subtle: rgba(19, 23, 41, 0.5);
+  --velora-bg-muted: rgba(26, 32, 53, 0.4);
+  --velora-surface-base: rgba(255, 255, 255, 0.06);
+  --velora-surface-raised: rgba(255, 255, 255, 0.1);
+  --velora-surface-overlay: rgba(255, 255, 255, 0.12);
+  --velora-border-base: rgba(255, 255, 255, 0.12);
+  --velora-border-strong: rgba(255, 255, 255, 0.2);
+  --velora-text-primary: rgba(255, 255, 255, 0.95);
+  --velora-text-secondary: rgba(255, 255, 255, 0.7);
+  --velora-text-tertiary: rgba(255, 255, 255, 0.45);
+  --velora-brand-default: #a08bff;
+  --velora-brand-subtle: rgba(160, 139, 255, 0.15);
+}
+
+/* ─── Luxury Theme ────────────────────────────────────────────────────────── */
+[data-velora-theme="luxury"] {
+  --velora-bg-base: #0a0804;
+  --velora-bg-subtle: #110e08;
+  --velora-bg-muted: #1a1710;
+  --velora-surface-base: #111008;
+  --velora-surface-raised: #19170e;
+  --velora-brand-default: #d4af37;
+  --velora-brand-emphasis: #c49b20;
+  --velora-brand-subtle: #2a2410;
+  --velora-brand-muted: #1a1808;
+  --velora-brand-fg: #0a0804;
+  --velora-text-primary: #f5f0e8;
+  --velora-text-secondary: #c8bfa0;
+  --velora-text-tertiary: #8a7d60;
+  --velora-text-brand: #d4af37;
+  --velora-border-base: #2a2418;
+  --velora-border-brand: #d4af37;
+  --velora-shadow-brand: 0 0 24px -4px rgba(212, 175, 55, 0.5);
+  --velora-shadow-brand-lg: 0 8px 32px -4px rgba(212, 175, 55, 0.6);
+  color-scheme: dark;
+}
+
+/* ─── Cyberpunk Theme ─────────────────────────────────────────────────────── */
+[data-velora-theme="cyberpunk"] {
+  color-scheme: dark;
+  --velora-bg-base: #050208;
+  --velora-bg-subtle: #0a0510;
+  --velora-bg-muted: #100918;
+  --velora-surface-base: #080510;
+  --velora-surface-raised: #0e0818;
+  --velora-brand-default: #00ffe0;
+  --velora-brand-emphasis: #00ffa8;
+  --velora-brand-subtle: #002820;
+  --velora-brand-muted: #001814;
+  --velora-brand-fg: #000000;
+  --velora-text-primary: #eef8ff;
+  --velora-text-secondary: #a0e8ff;
+  --velora-text-tertiary: #5098b8;
+  --velora-text-brand: #00ffe0;
+  --velora-border-base: #0a1828;
+  --velora-border-brand: #00ffe0;
+  --velora-state-success: #00ffe0;
+  --velora-state-danger: #ff0054;
+  --velora-shadow-brand: 0 0 24px -4px rgba(0, 255, 224, 0.6);
+  --velora-shadow-brand-lg: 0 8px 32px -4px rgba(0, 255, 224, 0.7);
+}
+
+/* ─── Neo Brutalism Theme ─────────────────────────────────────────────────── */
+[data-velora-theme="neo-brutalism"] {
+  --velora-bg-base: #fafaf8;
+  --velora-bg-subtle: #f0ede8;
+  --velora-surface-base: #ffffff;
+  --velora-surface-raised: #ffffff;
+  --velora-brand-default: #ff3d00;
+  --velora-brand-emphasis: #dd2200;
+  --velora-brand-subtle: #ffe8e2;
+  --velora-brand-fg: #ffffff;
+  --velora-text-primary: #000000;
+  --velora-text-secondary: #333333;
+  --velora-text-tertiary: #666666;
+  --velora-border-base: #000000;
+  --velora-border-strong: #000000;
+  --velora-border-brand: #ff3d00;
+  --velora-radius-component: 0px;
+  --velora-radius-input: 0px;
+  --velora-radius-badge: 0px;
+  --velora-radius-card: 0px;
+  --velora-radius-button: 0px;
+  --velora-shadow-xs: 2px 2px 0 0 #000;
+  --velora-shadow-sm: 3px 3px 0 0 #000;
+  --velora-shadow-md: 4px 4px 0 0 #000;
+  --velora-shadow-lg: 6px 6px 0 0 #000;
+  --velora-shadow-xl: 8px 8px 0 0 #000;
+  color-scheme: light;
+}
+
+/* ─── High Contrast Theme ─────────────────────────────────────────────────── */
+[data-velora-theme="high-contrast"] {
+  --velora-bg-base: #000000;
+  --velora-bg-subtle: #0a0a0a;
+  --velora-surface-base: #000000;
+  --velora-text-primary: #ffffff;
+  --velora-text-secondary: #eeeeee;
+  --velora-text-tertiary: #cccccc;
+  --velora-text-disabled: #888888;
+  --velora-brand-default: #ffff00;
+  --velora-brand-emphasis: #ffffff;
+  --velora-brand-fg: #000000;
+  --velora-border-base: #ffffff;
+  --velora-border-strong: #ffffff;
+  --velora-border-brand: #ffff00;
+  color-scheme: dark;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

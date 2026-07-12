@@ -1,0 +1,43 @@
+@import "@velora/core/styles";
+@import "tailwindcss";
+
+@source "../../../../packages/core/src";
+@source "../../../../packages/motion/src";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--velora-bg-base);
+    color: var(--velora-text-primary);
+    font-family: var(--velora-font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(128, 96, 255, 0.25);
+    color: var(--velora-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--velora-brand-default);
+    outline-offset: 2px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--velora-border-base) transparent;
+  }
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb {
+    background: var(--velora-border-base);
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--velora-border-strong);
+  }
+}
