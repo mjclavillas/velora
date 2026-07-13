@@ -2,7 +2,7 @@
 
 > Premium React UI Ecosystem — Beautiful, accessible, and theme-first.
 
-[![npm version](https://img.shields.io/npm/v/@velora/core.svg)](https://www.npmjs.com/package/@velora/core)
+[![npm version](https://img.shields.io/npm/v/@ui-velora/core.svg)](https://www.npmjs.com/package/@ui-velora/core)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue.svg)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -22,17 +22,17 @@ Velora is a production-ready React component library built for teams that care a
 
 | Package | Description |
 |---------|-------------|
-| `@velora/core` | Core component library (40+ components) |
-| `@velora/cli` | Scaffold and manage components via CLI |
-| `@velora/tokens` | Design tokens as JS/TS constants |
-| `@velora/motion` | Animation variants and utilities |
-| `@velora/icons` | Icon set optimized for Velora |
+| `@ui-velora/core` | Core component library (40+ components) |
+| `@ui-velora/cli` | Scaffold and manage components via CLI |
+| `@ui-velora/tokens` | Design tokens as JS/TS constants |
+| `@ui-velora/motion` | Animation variants and utilities |
+| `@ui-velora/icons` | Icon set optimized for Velora |
 
 ## Quick Start
 
 ```bash
 # Install
-npm install @velora/core framer-motion class-variance-authority clsx tailwind-merge
+npm install @ui-velora/core framer-motion class-variance-authority clsx tailwind-merge
 
 # Or with CLI
 npx velora init
@@ -40,8 +40,8 @@ npx velora init
 
 ```tsx
 // app/layout.tsx
-import { ThemeProvider, ThemeScript } from "@velora/core";
-import "@velora/core/styles";
+import { ThemeProvider, ThemeScript } from "@ui-velora/core";
+import "@ui-velora/core/styles";
 
 export default function RootLayout({ children }) {
   return (
@@ -67,7 +67,7 @@ import {
   Badge,
   Input,
   useToast,
-} from "@velora/core";
+} from "@ui-velora/core";
 
 export function ExampleCard() {
   const { success } = useToast();
@@ -142,7 +142,7 @@ export function ExampleCard() {
 ## Themes
 
 ```tsx
-import { useTheme } from "@velora/core";
+import { useTheme } from "@ui-velora/core";
 
 function ThemeSwitcher() {
   const { theme, setTheme, themes } = useTheme();
@@ -183,14 +183,14 @@ import {
   useToggle,          // Simple boolean toggle
   useKeyboard,        // Keyboard shortcut handler
   useScrollLock,      // Lock body scroll
-} from "@velora/core";
+} from "@ui-velora/core";
 ```
 
 ## Tailwind Plugin
 
 ```js
 // tailwind.config.ts
-import { veloraTailwindPlugin } from "@velora/core/tailwind";
+import { veloraTailwindPlugin } from "@ui-velora/core/tailwind";
 
 export default {
   content: ["./src/**/*.{ts,tsx}"],
@@ -233,7 +233,7 @@ npx velora doctor
 ```
 velora/
 ├── packages/
-│   ├── core/           # @velora/core — main component library
+│   ├── core/           # @ui-velora/core — main component library
 │   │   └── src/
 │   │       ├── components/
 │   │       ├── theme/
@@ -241,10 +241,10 @@ velora/
 │   │       ├── motion/
 │   │       ├── hooks/
 │   │       └── utils/
-│   ├── cli/            # @velora/cli — scaffold tool
-│   ├── tokens/         # @velora/tokens — design token constants
-│   ├── motion/         # @velora/motion — animation utilities
-│   └── icons/          # @velora/icons — icon set
+│   ├── cli/            # @ui-velora/cli — scaffold tool
+│   ├── tokens/         # @ui-velora/tokens — design token constants
+│   ├── motion/         # @ui-velora/motion — animation utilities
+│   └── icons/          # @ui-velora/icons — icon set
 ├── apps/
 │   ├── docs/           # Documentation site
 │   └── playground/     # Component playground

@@ -150,13 +150,13 @@ program
       // Install instructions
       console.log(`\n${c.bold}Next steps:${c.reset}\n`);
       console.log(
-        `  ${c.cyan}1.${c.reset} Install dependencies:\n     ${dim("npm install @velora/core framer-motion class-variance-authority clsx tailwind-merge")}\n`
+        `  ${c.cyan}1.${c.reset} Install dependencies:\n     ${dim("npm install @ui-velora/core framer-motion class-variance-authority clsx tailwind-merge")}\n`
       );
       console.log(
-        `  ${c.cyan}2.${c.reset} Add the ThemeProvider to your root layout:\n     ${dim('import { ThemeProvider } from "@velora/core"')}\n`
+        `  ${c.cyan}2.${c.reset} Add the ThemeProvider to your root layout:\n     ${dim('import { ThemeProvider } from "@ui-velora/core"')}\n`
       );
       console.log(
-        `  ${c.cyan}3.${c.reset} Import the theme CSS:\n     ${dim('import "@velora/core/styles"')}\n`
+        `  ${c.cyan}3.${c.reset} Import the theme CSS:\n     ${dim('import "@ui-velora/core/styles"')}\n`
       );
       console.log(
         `  ${c.cyan}4.${c.reset} Add components:\n     ${dim("npx velora add button card toast")}\n`
@@ -212,7 +212,7 @@ program
 
     console.log(`\n${c.bold}Install peer deps:${c.reset}`);
     console.log(
-      `  ${dim("npm install @velora/core")}\n`
+      `  ${dim("npm install @ui-velora/core")}\n`
     );
     console.log(
       `${c.bold}Import in your project:${c.reset}`
@@ -222,7 +222,7 @@ program
         .split("-")
         .map((p) => p[0]!.toUpperCase() + p.slice(1))
         .join("");
-      console.log(`  ${dim(`import { ${exportName} } from "@velora/core"`)}`);
+      console.log(`  ${dim(`import { ${exportName} } from "@ui-velora/core"`)}`);
     }
     console.log();
   });
@@ -304,12 +304,12 @@ program
         },
       },
       {
-        name: "@velora/core installed",
+        name: "@ui-velora/core installed",
         check: async () => {
           const pkg = JSON.parse(
             await fs.readFile("package.json", "utf-8")
           ) as { dependencies?: Record<string, string> };
-          return !!pkg.dependencies?.["@velora/core"];
+          return !!pkg.dependencies?.["@ui-velora/core"];
         },
       },
     ];

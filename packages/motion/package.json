@@ -1,6 +1,6 @@
 {
-  "name": "@velora/motion",
-  "version": "0.1.0",
+  "name": "@ui-velora/motion",
+  "version": "0.1.1",
   "description": "Velora animation utilities and React components",
   "license": "MIT",
   "type": "module",
@@ -27,7 +27,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist", "src"],
+  "files": ["dist", "src", "README.md"],
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts",
     "dev": "tsup src/index.tsx --format esm,cjs --dts --watch",

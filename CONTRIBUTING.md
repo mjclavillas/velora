@@ -8,10 +8,10 @@ to get started.
 ```
 velora/
 ├── packages/
-│   ├── core/        Main component library (@velora/core)
-│   ├── cli/         CLI scaffold tool (@velora/cli)
-│   ├── tokens/      Design token constants (@velora/tokens)
-│   └── motion/      Animation utilities (@velora/motion)
+│   ├── core/        Main component library (@ui-velora/core)
+│   ├── cli/         CLI scaffold tool (@ui-velora/cli)
+│   ├── tokens/      Design token constants (@ui-velora/tokens)
+│   └── motion/      Animation utilities (@ui-velora/motion)
 ├── apps/
 │   ├── docs/        Documentation site (Next.js)
 │   └── playground/  Component sandbox (Next.js)
@@ -26,15 +26,15 @@ velora/
 
 ```bash
 # Clone and install
-git clone https://github.com/velora-ui/velora.git
+git clone https://github.com/mjclavillas/velora.git
 cd velora
 pnpm install
 
 # Start docs dev server
-pnpm dev --filter=@velora/docs
+pnpm dev --filter=@ui-velora/docs
 
 # Start playground
-pnpm dev --filter=@velora/playground
+pnpm dev --filter=@ui-velora/playground
 
 # Build all packages
 pnpm build
@@ -94,7 +94,7 @@ function MyComponent({ className }) {
 ## Styling rules
 
 - All colors via CSS variables: `var(--velora-text-primary)`, never `text-gray-900`
-- Use `cn()` from `@velora/core` (re-exports `clsx` + `tailwind-merge`)
+- Use `cn()` from `@ui-velora/core` (re-exports `clsx` + `tailwind-merge`)
 - Use `cva()` for variant APIs
 - Never use `!important` in components
 - Animations must use `useReducedMotion()` guard

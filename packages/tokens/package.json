@@ -1,6 +1,6 @@
 {
-  "name": "@velora/tokens",
-  "version": "0.1.0",
+  "name": "@ui-velora/tokens",
+  "version": "0.1.1",
   "description": "Velora design tokens as JS/TS constants",
   "license": "MIT",
   "type": "module",
@@ -27,7 +27,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist", "src"],
+  "files": ["dist", "src", "README.md"],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "dev": "tsup src/index.ts --format esm,cjs --dts --watch",

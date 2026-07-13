@@ -1,6 +1,6 @@
 {
-  "name": "@velora/core",
-  "version": "0.1.0",
+  "name": "@ui-velora/core",
+  "version": "0.1.1",
   "description": "Velora core component library",
   "license": "MIT",
   "type": "module",
@@ -30,7 +30,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",

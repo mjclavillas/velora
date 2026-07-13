@@ -1,6 +1,6 @@
 {
-  "name": "@velora/cli",
-  "version": "0.1.0",
+  "name": "@ui-velora/cli",
+  "version": "0.1.1",
   "description": "Velora UI Ecosystem CLI",
   "license": "MIT",
   "type": "module",
@@ -20,7 +20,7 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "files": ["dist"],
+  "files": ["dist", "README.md"],
   "publishConfig": {
     "access": "public"
   },
