@@ -208,24 +208,30 @@ Adds utilities: `glass`, `glass-sm`, `glass-lg`, `gradient-brand`, `gradient-tex
 ## CLI
 
 ```bash
+# Install CLI
+npm install -g @ui-velora/cli
+
+# Or use directly with npx
+npx @ui-velora/cli init
+
 # Initialize in existing project
-npx velora init
+velora init
 
 # Add specific components
-npx velora add button card toast sidebar
+velora add button card toast sidebar
 
 # Add all components
-npx velora add --all
+velora add --all
 
 # List available components
-npx velora list
+velora list
 
 # Manage themes
-npx velora theme list
-npx velora theme set luxury
+velora theme list
+velora theme set luxury
 
 # Check setup
-npx velora doctor
+velora doctor
 ```
 
 ## Monorepo Structure
