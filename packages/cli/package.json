@@ -1,6 +1,6 @@
 {
   "name": "@ui-velora/cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Velora UI Ecosystem CLI",
   "license": "MIT",
   "type": "module",
