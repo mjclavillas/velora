@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/mjclavillas/velora/issues"
   },
-  "keywords": ["animation", "motion", "framer-motion", "react", "transitions", "velora"],
+  "keywords": ["animation", "motion", "framer-motion", "react", "transitions", "velora", "animations", "react-animations", "page-transitions", "scroll-animations", "hover-effects", "fade-in", "slide-in", "spring", "stagger", "variants", "entrance-animation", "exit-animation", "ui-animation", "open-source"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

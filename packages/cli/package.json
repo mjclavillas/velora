@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/mjclavillas/velora/issues"
   },
-  "keywords": ["cli", "velora", "scaffolding", "component-generator"],
+  "keywords": ["cli", "velora", "scaffolding", "component-generator", "react", "nextjs", "vite", "tailwind", "ui-library", "design-system", "starter-template", "project-scaffold", "tanstack-start", "astro", "laravel", "react-router", "typescript", "frontend", "boilerplate", "open-source"],
   "bin": {
     "velora": "./dist/index.js"
   },

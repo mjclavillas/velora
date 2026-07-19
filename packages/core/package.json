@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/mjclavillas/velora/issues"
   },
-  "keywords": ["ui", "component-library", "react", "tailwind", "radix", "design-system"],
+  "keywords": ["ui", "component-library", "react", "tailwind", "radix", "design-system", "react-components", "tailwindcss", "headless", "accessible", "accessible-components", "ui-kit", "form-components", "dialog", "dropdown", "tabs", "accordion", "tooltip", "select", "checkbox", "switch", "progress", "skeleton", "badge", "avatar", "separator", "scroll-area", "navigation", "popover", "command", "sidebar", "toast", "table", "textarea", "spinner", "dark-mode", "theming", "css-variables", "nextjs", "vite", "typescript", "open-source", "velora"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

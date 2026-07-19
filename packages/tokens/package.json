@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/mjclavillas/velora/issues"
   },
-  "keywords": ["tokens", "design-tokens", "css-variables", "theme", "velora"],
+  "keywords": ["tokens", "design-tokens", "css-variables", "theme", "velora", "design-system", "theming", "dark-mode", "colors", "typography", "spacing", "shadows", "border-radius", "tailwind", "css-custom-properties", "ui-tokens", "open-source"],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
