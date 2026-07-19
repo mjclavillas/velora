@@ -1,6 +1,6 @@
 {
   "name": "@ui-velora/motion",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Velora animation utilities and React components",
   "license": "MIT",
   "type": "module",
