@@ -18,6 +18,23 @@ export default function GettingStartedPage() {
         badges={["Quick Start"]}
       />
 
+      <DocSection title="Fastest: Use the CLI">
+        <p className="mb-3 text-sm text-[var(--velora-text-secondary)]">
+          The CLI scaffolds a complete project with Velora fully configured — skip the manual steps below.
+        </p>
+        <DocCodeBlock
+          code={`npx velora init
+
+# Follow the prompts, then:
+cd my-app
+npm run dev`}
+          title="Terminal"
+        />
+        <p className="mt-3 text-sm text-[var(--velora-text-secondary)]">
+          See the <a href="/docs/cli" className="text-[var(--velora-text-brand)] underline underline-offset-2">CLI documentation</a> for all options and supported frameworks.
+        </p>
+      </DocSection>
+
       <DocSection title="1. Install">
         <DocCodeBlock code={`npm install @velora/core @velora/motion`} title="Terminal" />
       </DocSection>

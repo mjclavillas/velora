@@ -23,6 +23,7 @@ const navigation: NavSection[] = [
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
+      { title: "CLI", href: "/docs/cli" },
       { title: "Quick Start", href: "/docs/quick-start" },
       { title: "Theming", href: "/docs/theming" },
       { title: "TypeScript", href: "/docs/typescript" },

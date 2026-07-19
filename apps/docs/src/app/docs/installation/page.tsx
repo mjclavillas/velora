@@ -14,11 +14,23 @@ export default function InstallationPage() {
     <>
       <DocsPageHeader
         title="Installation"
-        description="Install the packages you need to start building with Velora UI."
+        description="Install Velora UI and its dependencies."
         badges={["Guide"]}
       />
 
-      <DocSection title="Core Package">
+      <DocSection title="Recommended: Use the CLI">
+        <p className="mb-3 text-sm text-[var(--velora-text-secondary)]">
+          The fastest way to get started is with the CLI. It scaffolds a complete project with all
+          configuration pre-wired — no manual setup needed.
+        </p>
+        <DocCodeBlock code={`npx velora init`} title="Terminal" />
+        <p className="mt-3 text-sm text-[var(--velora-text-secondary)]">
+          Supports Next.js, Vite, TanStack Start, React Router, Astro, and Laravel.
+          See the <a href="/docs/cli" className="text-[var(--velora-text-brand)] underline underline-offset-2">CLI documentation</a> for details.
+        </p>
+      </DocSection>
+
+      <DocSection title="Manual Install">
         <DocCodeBlock code={`npm install @velora/core`} title="Terminal" />
         <p className="mt-3 text-sm text-[var(--velora-text-secondary)]">
           This installs all 40+ components, hooks, theme system, CSS variables, and Tailwind utilities.
@@ -83,7 +95,7 @@ framer-motion >= 11.0.0`}
 
       <DocsPageNav
         prev={{ title: "Introduction", href: "/docs" }}
-        next={{ title: "Quick Start", href: "/docs/quick-start" }}
+        next={{ title: "CLI", href: "/docs/cli" }}
       />
     </>
   );

@@ -1,21 +1,28 @@
 #!/usr/bin/env node
 /**
- * Velora CLI
  *
  * Scaffold projects, add components, and manage themes from the terminal.
  *
  * Usage:
- *   npx velora init
- *   npx velora add button card toast
- *   npx velora theme list
- *   npx velora theme set dark
+ *   velora init
+ *   velora init --template next --name my-app --theme dark
+ *   velora add button card toast
+ *   velora theme list
+ *   velora theme set dark
  */
 
 import { Command } from "commander";
 import { createRequire } from "module";
+import readline from "readline";
 import path from "path";
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
+import {
+  scaffoldProject,
+  TEMPLATE_LIST,
+  THEMES,
+  PACKAGE_MANAGERS,
+} from "./init/scaffold.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -59,6 +66,58 @@ const error = (s: string) => `${c.red}✗${c.reset} ${s}`;
 const info = (s: string) => `${c.cyan}→${c.reset} ${s}`;
 const dim = (s: string) => `${c.dim}${s}${c.reset}`;
 
+// ─── Prompt helper ───────────────────────────────────────────────────────────
+
+function createPrompt() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return {
+    ask(question: string): Promise<string> {
+      return new Promise((resolve) => {
+        rl.question(question, (answer) => {
+          resolve(answer.trim());
+        });
+      });
+    },
+    choose(question: string, options: string[]): Promise<string> {
+      return new Promise((resolve) => {
+        console.log(`\n${question}\n`);
+        options.forEach((opt, i) => {
+          console.log(`  ${c.cyan}${i + 1}${c.reset}) ${opt}`);
+        });
+        const ask = () => {
+          rl.question(`${dim("  Enter number (1-" + options.length + "): ")}`, (answer) => {
+            const idx = parseInt(answer, 10) - 1;
+            if (idx >= 0 && idx < options.length) {
+              resolve(options[idx]!);
+            } else {
+              console.log(`${c.red}Invalid selection. Please try again.${c.reset}`);
+              ask();
+            }
+          });
+        };
+        ask();
+      });
+    },
+    confirm(question: string, defaultVal = true): Promise<boolean> {
+      return new Promise((resolve) => {
+        const hint = defaultVal ? "[Y/n]" : "[y/N]";
+        rl.question(`${question} ${dim(hint)} `, (answer) => {
+          const val = answer.trim().toLowerCase();
+          if (val === "") return resolve(defaultVal);
+          resolve(val === "y" || val === "yes");
+        });
+      });
+    },
+    close() {
+      rl.close();
+    },
+  };
+}
+
 // ─── Available components ────────────────────────────────────────────────────
 
 const COMPONENTS: Record<string, { deps?: string[]; description: string }> = {
@@ -90,11 +149,6 @@ const COMPONENTS: Record<string, { deps?: string[]; description: string }> = {
   tooltip: { description: "Contextual hover information" },
 };
 
-const THEMES = [
-  "light", "dark", "system", "amoled", "glass",
-  "luxury", "cyberpunk", "neo-brutalism", "high-contrast", "minimal",
-];
-
 // ─── Program ─────────────────────────────────────────────────────────────────
 
 const program = new Command();
@@ -102,67 +156,78 @@ const program = new Command();
 program
   .name("velora")
   .description("Velora UI Ecosystem CLI")
-  .version("0.1.0");
+  .version("0.2.0");
 
 // ─── Init ────────────────────────────────────────────────────────────────────
 
 program
   .command("init")
-  .description("Initialize Velora in your project")
-  .option("--theme <theme>", "Default theme", "dark")
-  .option("--no-tailwind", "Skip Tailwind configuration")
-  .option("--src-dir", "Use src/ directory structure")
+  .description("Scaffold a new project with Velora")
+  .option("--template <template>", `Framework template (${TEMPLATE_LIST.map((t) => t.key).join(", ")})`)
+  .option("--name <name>", "Project name")
+  .option("--theme <theme>", `Default theme (${THEMES.join(", ")})`, "dark")
+  .option("--package-manager <pm>", `Package manager (${PACKAGE_MANAGERS.join(", ")})`)
+  .option("--no-install", "Skip dependency installation")
   .action(async (opts) => {
     console.log(`\n${brand("Velora")} ${c.dim}— Premium React UI Ecosystem${c.reset}\n`);
-    console.log(info("Initializing Velora in your project…\n"));
 
-    const config: VeloraConfig = {
-      version: "0.1.0",
-      theme: opts.theme,
-      components: [],
-      aliases: {
-        components: "@/components/ui",
-        utils: "@/lib/utils",
-        hooks: "@/hooks",
-      },
-      tailwind: {
-        config: "tailwind.config.ts",
-        css: "src/app/globals.css",
-      },
-    };
+    const prompt = createPrompt();
 
     try {
-      // Write velora.config.json
-      await fs.writeFile(
-        "velora.config.json",
-        JSON.stringify(config, null, 2)
-      );
-      console.log(success("Created velora.config.json"));
+      // Project name
+      let projectName = opts.name;
+      if (!projectName) {
+        projectName = await prompt.ask(`${info(" Project name: ")}`);
+        if (!projectName) {
+          console.log(error("Project name is required."));
+          process.exit(1);
+        }
+      }
 
-      // Create utils file
-      await fs.mkdir("lib", { recursive: true });
-      await fs.writeFile(
-        "lib/utils.ts",
-        `import { type ClassValue, clsx } from "clsx";\nimport { twMerge } from "tailwind-merge";\n\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n`
-      );
-      console.log(success("Created lib/utils.ts"));
+      // Framework template
+      let templateKey = opts.template;
+      if (!templateKey) {
+        const templateNames = TEMPLATE_LIST.map((t) => t.name);
+        const chosen = await prompt.choose("Select a framework:", templateNames);
+        const match = TEMPLATE_LIST.find((t) => t.name === chosen);
+        templateKey = match!.key;
+      }
 
-      // Install instructions
-      console.log(`\n${c.bold}Next steps:${c.reset}\n`);
-      console.log(
-        `  ${c.cyan}1.${c.reset} Install dependencies:\n     ${dim("npm install @ui-velora/core framer-motion class-variance-authority clsx tailwind-merge")}\n`
-      );
-      console.log(
-        `  ${c.cyan}2.${c.reset} Add the ThemeProvider to your root layout:\n     ${dim('import { ThemeProvider } from "@ui-velora/core"')}\n`
-      );
-      console.log(
-        `  ${c.cyan}3.${c.reset} Import the theme CSS:\n     ${dim('import "@ui-velora/core/styles"')}\n`
-      );
-      console.log(
-        `  ${c.cyan}4.${c.reset} Add components:\n     ${dim("npx velora add button card toast")}\n`
-      );
+      // Theme
+      let theme = opts.theme;
+      if (!opts.template && !opts.theme) {
+        // Only prompt if not provided via flags
+        const chosen = await prompt.choose("Select a default theme:", THEMES);
+        theme = chosen;
+      }
+
+      // Package manager
+      let pm = opts.packageManager;
+      if (pm === undefined && opts.install !== false) {
+        pm = await prompt.choose("Package manager:", PACKAGE_MANAGERS);
+      }
+
+      // Install deps
+      let installDeps = opts.install !== false;
+      if (installDeps && !opts.packageManager && !opts.template) {
+        installDeps = await prompt.confirm("\nInstall dependencies?", true);
+      }
+
+      prompt.close();
+
+      console.log();
+
+      // Scaffold
+      await scaffoldProject({
+        name: projectName,
+        template: templateKey!,
+        theme,
+        packageManager: pm || "npm",
+        installDeps,
+      });
     } catch (err) {
-      console.error(error(`Failed to initialize: ${err}`));
+      prompt.close();
+      console.error(error(`Init failed: ${err}`));
       process.exit(1);
     }
   });

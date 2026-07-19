@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
       </DocSection>
 
       <DocsPageNav
-        prev={{ title: "Installation", href: "/docs/installation" }}
+        prev={{ title: "CLI", href: "/docs/cli" }}
         next={{ title: "Theming", href: "/docs/theming" }}
       />
     </>

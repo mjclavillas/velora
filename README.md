@@ -208,14 +208,11 @@ Adds utilities: `glass`, `glass-sm`, `glass-lg`, `gradient-brand`, `gradient-tex
 ## CLI
 
 ```bash
-# Install CLI
-npm install -g @ui-velora/cli
+# Scaffold a new project (interactive prompts)
+npx velora init
 
-# Or use directly with npx
-npx @ui-velora/cli init
-
-# Initialize in existing project
-velora init
+# Non-interactive — all flags
+npx velora init --template next --name my-app --theme dark --package-manager pnpm
 
 # Add specific components
 velora add button card toast sidebar
@@ -233,6 +230,8 @@ velora theme set luxury
 # Check setup
 velora doctor
 ```
+
+**Supported templates:** `next`, `vite`, `start` (TanStack Start), `react-router`, `astro`, `laravel`
 
 ## Monorepo Structure
 
