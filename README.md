@@ -12,7 +12,7 @@
 
 Velora is a production-ready React component library built for teams that care about design quality, developer experience, and accessibility. Every component is:
 
-- **Theme-first** — 8 built-in themes (Dark, Light, AMOLED, Glass, Luxury, Cyberpunk, Neo Brutalism, High Contrast) via CSS custom properties
+- **Theme-first** — 14 built-in themes (Dark, Light, AMOLED, Glass, Luxury, Cyberpunk, Neo Brutalism, High Contrast, Enterprise, Modern SaaS, Elegant Dark, Soft UI, Minimal, System) via CSS custom properties
 - **Accessible** — WCAG 2.1 AA, Radix UI primitives, full keyboard navigation
 - **Animated** — Framer Motion with spring physics, reduced-motion support, and layout animations
 - **TypeScript-native** — strict types, CVA variant inference, complete prop documentation
@@ -22,11 +22,10 @@ Velora is a production-ready React component library built for teams that care a
 
 | Package | Description |
 |---------|-------------|
-| `@ui-velora/core` | Core component library (40+ components) |
+| `@ui-velora/core` | Core component library (26 components, 16 hooks) |
 | `@ui-velora/cli` | Scaffold and manage components via CLI |
 | `@ui-velora/tokens` | Design tokens as JS/TS constants |
 | `@ui-velora/motion` | Animation variants and utilities |
-| `@ui-velora/icons` | Icon set optimized for Velora |
 
 ## Quick Start
 
@@ -157,7 +156,7 @@ function ThemeSwitcher() {
 }
 ```
 
-Available themes: `light` `dark` `system` `amoled` `glass` `luxury` `cyberpunk` `neo-brutalism` `high-contrast` `minimal`
+Available themes: `light` `dark` `system` `amoled` `glass` `luxury` `enterprise` `modern-saas` `elegant-dark` `high-contrast` `cyberpunk` `neo-brutalism` `soft-ui` `minimal`
 
 Custom theme via CSS variables:
 
@@ -173,16 +172,22 @@ Custom theme via CSS variables:
 
 ```ts
 import {
-  useDebounce,        // Debounce any value
-  useLocalStorage,    // Persistent state with SSR safety
-  useMediaQuery,      // Responsive breakpoints
-  useIsMobile,        // boolean — < 768px
-  useClickOutside,    // Detect outside clicks
-  useCountUp,         // Animated number counting
-  useCopyToClipboard, // Copy with reset timeout
-  useToggle,          // Simple boolean toggle
-  useKeyboard,        // Keyboard shortcut handler
-  useScrollLock,      // Lock body scroll
+  useDebounce,              // Debounce any value
+  useLocalStorage,          // Persistent state with SSR safety
+  useMediaQuery,            // Responsive breakpoints
+  useIsMobile,              // boolean — < 768px
+  useIsTablet,              // boolean — 768px–1023px
+  useIsDesktop,             // boolean — >= 1024px
+  usePrefersDark,           // boolean — system dark mode preference
+  usePrefersReducedMotion,  // boolean — reduced motion preference
+  useClickOutside,          // Detect outside clicks
+  useIntersectionObserver,  // Element visibility tracking
+  useCountUp,               // Animated number counting
+  useCopyToClipboard,       // Copy with reset timeout
+  useToggle,                // Simple boolean toggle
+  useKeyboard,              // Keyboard shortcut handler
+  usePrevious,              // Track previous value
+  useScrollLock,            // Lock body scroll
 } from "@ui-velora/core";
 ```
 
@@ -248,8 +253,7 @@ velora/
 │   │       └── utils/
 │   ├── cli/            # @ui-velora/cli — scaffold tool
 │   ├── tokens/         # @ui-velora/tokens — design token constants
-│   ├── motion/         # @ui-velora/motion — animation utilities
-│   └── icons/          # @ui-velora/icons — icon set
+│   └── motion/         # @ui-velora/motion — animation utilities
 ├── apps/
 │   ├── docs/           # Documentation site
 │   └── playground/     # Component playground

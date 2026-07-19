@@ -239,8 +239,10 @@ program
   .description("Add components to your project")
   .option("--all", "Add all available components")
   .option("--overwrite", "Overwrite existing files")
+  .option("--dir <dir>", "Component output directory", "components/ui")
   .action(async (components: string[], opts) => {
     const toAdd = opts.all ? Object.keys(COMPONENTS) : components;
+    const outDir = opts.dir;
 
     if (toAdd.length === 0) {
       console.log("\nAvailable components:\n");
@@ -253,9 +255,42 @@ program
       return;
     }
 
-    console.log(`\n${info("Adding components…\n")}`);
+    // Find @ui-velora/core source in node_modules
+    let pkgSrc: string;
+    try {
+      const pkgJsonPath = require.resolve("@ui-velora/core/package.json");
+      pkgSrc = path.join(path.dirname(pkgJsonPath), "src");
+      await fs.access(pkgSrc);
+    } catch {
+      console.log(error("@ui-velora/core not found. Install it first:"));
+      console.log(dim("  npm install @ui-velora/core\n"));
+      process.exit(1);
+    }
 
-    // Resolve deps
+    // Ensure output directory exists
+    await fs.mkdir(outDir, { recursive: true });
+
+    // Write local utils if it doesn't exist
+    const utilsPath = path.join(outDir, "..", "lib", "utils.ts");
+    if (!(await fileExists(utilsPath))) {
+      const utilsDir = path.dirname(utilsPath);
+      await fs.mkdir(utilsDir, { recursive: true });
+      await fs.writeFile(
+        utilsPath,
+        [
+          'import { type ClassValue, clsx } from "clsx";',
+          'import { twMerge } from "tailwind-merge";',
+          "",
+          "export function cn(...inputs: ClassValue[]): string {",
+          "  return twMerge(clsx(inputs));",
+          "}",
+          "",
+        ].join("\n")
+      );
+      console.log(success(`Created ${path.relative(process.cwd(), utilsPath)}`));
+    }
+
+    // Resolve dependency tree
     const resolved = new Set<string>();
     const resolve = (name: string) => {
       if (resolved.has(name)) return;
@@ -263,34 +298,113 @@ program
       const meta = COMPONENTS[name];
       if (meta?.deps) meta.deps.forEach(resolve);
     };
+
+    const invalid: string[] = [];
     toAdd.forEach((c) => {
       if (!COMPONENTS[c]) {
-        console.log(warn(`Unknown component: ${c}`));
+        invalid.push(c);
       } else {
         resolve(c);
       }
     });
 
-    for (const name of resolved) {
-      console.log(success(`${name}`));
+    if (invalid.length > 0) {
+      for (const name of invalid) {
+        console.log(warn(`Unknown component: ${name}`));
+      }
     }
 
-    console.log(`\n${c.bold}Install peer deps:${c.reset}`);
+    console.log(`\n${info(`Adding ${resolved.size} component(s)…\n`)}`);
+
+    let filesWritten = 0;
+
+    for (const name of resolved) {
+      const srcDir = path.join(pkgSrc, "components", name);
+
+      try {
+        await fs.access(srcDir);
+      } catch {
+        console.log(warn(`Source not found for ${name}, skipping`));
+        continue;
+      }
+
+      const destDir = path.join(outDir, name);
+      await fs.mkdir(destDir, { recursive: true });
+
+      const files = await getAllFiles(srcDir);
+
+      for (const file of files) {
+        const relativePath = path.relative(srcDir, file);
+        const destFile = path.join(destDir, relativePath);
+        const destFileRelative = path.relative(process.cwd(), destFile);
+
+        if (!(await fileExists(destFile)) || opts.overwrite) {
+          let content = await fs.readFile(file, "utf-8");
+
+          // Rewrite relative imports to use local utils
+          // ../../utils → ../lib/utils
+          const utilsRelDir = path.relative(
+            path.dirname(destFile),
+            path.dirname(utilsPath)
+          ).replace(/\\/g, "/");
+          content = content.replace(
+            /from\s+["']\.\.\/(\.\.\/)*utils["']/g,
+            `from "${utilsRelDir}/utils"`
+          );
+
+          // Remove "use client" from components (user decides)
+          content = content.replace(/^"use client";\s*\n/gm, "");
+
+          await fs.writeFile(destFile, content);
+          console.log(success(destFileRelative));
+          filesWritten++;
+        } else {
+          console.log(dim(`${destFileRelative} (exists, skipping)`));
+        }
+      }
+    }
+
     console.log(
-      `  ${dim("npm install @ui-velora/core")}\n`
+      `\n${c.bold}${filesWritten} file(s) written to ${outDir}/${c.reset}\n`
     );
-    console.log(
-      `${c.bold}Import in your project:${c.reset}`
-    );
+
+    console.log(`${c.bold}Imports:${c.reset}`);
     for (const name of resolved) {
       const exportName = name
         .split("-")
         .map((p) => p[0]!.toUpperCase() + p.slice(1))
         .join("");
-      console.log(`  ${dim(`import { ${exportName} } from "@ui-velora/core"`)}`);
+      console.log(
+        `  ${dim(`import { ${exportName} } from "@/components/ui/${name}/${exportName}";`)}`
+      );
     }
     console.log();
   });
+
+// ─── Helpers for add command ────────────────────────────────────────────────
+
+async function fileExists(p: string): Promise<boolean> {
+  try {
+    await fs.access(p);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function getAllFiles(dir: string): Promise<string[]> {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  const files: string[] = [];
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await getAllFiles(full)));
+    } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
+      files.push(full);
+    }
+  }
+  return files;
+}
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 

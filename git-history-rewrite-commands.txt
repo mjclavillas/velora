@@ -1,0 +1,11 @@
+git log --oneline --all -- prompt.md
+git filter-repo --version
+git stash
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch prompt.md" --prune-empty -- --all
+git update-ref -d refs/original/refs/heads/main
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+git push --force
+git stash pop
+git stash drop
+git status
