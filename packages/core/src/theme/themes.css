@@ -9,6 +9,9 @@
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
 :root {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+
   --velora-font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --velora-font-mono: "JetBrains Mono", "Fira Code", monospace;
   --velora-font-display: "Sora", "Inter", system-ui, sans-serif;

@@ -1,6 +1,6 @@
 {
   "name": "@ui-velora/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Velora core component library",
   "license": "MIT",
   "type": "module",
