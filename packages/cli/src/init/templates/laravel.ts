@@ -107,6 +107,8 @@ export function cn(...inputs: ClassValue[]): string {
       content: () => `@import "@ui-velora/core/styles";
 @import "tailwindcss";
 
+@source "../../../node_modules/@ui-velora/core/src";
+
 @layer base {
   * {
     box-sizing: border-box;

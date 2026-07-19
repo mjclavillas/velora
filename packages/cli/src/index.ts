@@ -156,7 +156,7 @@ const program = new Command();
 program
   .name("velora")
   .description("Velora UI Ecosystem CLI")
-  .version("0.2.0");
+  .version("0.2.1");
 
 // ─── Init ────────────────────────────────────────────────────────────────────
 
